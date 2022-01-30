@@ -13,9 +13,9 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 open class Application(
-    private val packageName: String,
-    private val category: Category,
-    private val enabled: Boolean
+    val packageName: String,
+    val category: Category,
+    val enabled: Boolean
 )
 
 @Serializable

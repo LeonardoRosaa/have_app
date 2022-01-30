@@ -37,7 +37,7 @@ class HaveAppPlugin: FlutterPlugin, MethodCallHandler {
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
     val obj = Json.decodeFromString<GetApplication>(call.arguments as String)
     val a = applicationService.getApplication(obj.packageName)
-    println(a)
+
     result.success(Json.encodeToString(a))
   }
 
