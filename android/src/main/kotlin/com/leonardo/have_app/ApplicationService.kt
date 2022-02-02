@@ -1,5 +1,8 @@
 package com.leonardo.have_app
 
+import arrow.core.Either
+import arrow.core.left
+import com.leonardo.have_app.core.exceptions.ApplicationPackageNameDoesNotBeEmptyException
 import com.leonardo.have_app.core.types.GetApplication
 
 interface ApplicationService {
@@ -13,6 +16,8 @@ interface ApplicationService {
 
 class PackageManagerService(private val applicationGateway: ApplicationGateway): ApplicationService {
     override fun getApplication(packageName: String): GetApplication {
+        if (packageName.isEmpty()) return Either.Left(ApplicationPackageNameDoesNotBeEmptyException())
+
         return applicationGateway.getApplication(packageName)
     }
 }

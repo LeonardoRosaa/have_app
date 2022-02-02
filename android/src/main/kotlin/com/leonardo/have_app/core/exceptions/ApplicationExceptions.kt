@@ -12,3 +12,9 @@ class ApplicationNotFoundException(packageName: String) :
 
 class GetApplicationException(error: String?) :
     ApplicationException("GetApplicationException", error)
+
+class ApplicationPackageNameDoesNotBeEmptyException() :
+    ApplicationException(
+        "ApplicationPackageNameDoesNotBeEmptyException",
+        "The package name of application does not be empty"
+    )

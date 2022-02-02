@@ -1,3 +1,4 @@
+
 import 'dart:async';
 import 'dart:convert';
 
@@ -7,14 +8,9 @@ class HaveApp {
   static const MethodChannel _channel = MethodChannel('have_app');
 
   static Future<String?> get platformVersion async {
-    try {
-      final dynamic version = await _channel.invokeMethod(
-          'getPlatformVersion', jsonEncode({"packageName": "instagram"}));
-      print(version);
-    } catch (error) {
-      print(error);
-    }
-
+    final version = await _channel.invokeMethod('getApplication', jsonEncode({ "packageName": "instagram"}));
+    print(version);
+   
     return '111';
   }
 }
