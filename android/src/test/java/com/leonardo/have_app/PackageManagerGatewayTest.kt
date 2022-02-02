@@ -2,6 +2,9 @@ package com.leonardo.have_app
 
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import com.leonardo.have_app.core.exceptions.ApplicationNotFoundException
+import io.kotest.assertions.arrow.core.shouldBeLeft
+import io.kotest.assertions.arrow.core.shouldBeRight
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -10,7 +13,6 @@ import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
-import org.junit.Assert.assertEquals
 
 @RunWith(MockitoJUnitRunner::class)
 class PackageManagerGatewayTest {
@@ -19,7 +21,7 @@ class PackageManagerGatewayTest {
     private lateinit var mockPackageManager: PackageManager
 
     @Test
-    fun getApplicationByPackageName() {
+    fun `get package by name`() {
         val applicationInfo = mock(ApplicationInfo::class.java)
         applicationInfo.packageName = "instagram"
         applicationInfo.category = Category.SOCIAL.value
@@ -31,9 +33,28 @@ class PackageManagerGatewayTest {
 
         val result = applicationGateway.getApplication("instagram")
 
-        assertEquals(result.packageName, "instagram")
-        assertEquals(result.category, Category.SOCIAL)
-        assertEquals(result.enabled, true)
+        result.shouldBeRight(
+            ApplicationModel(
+                "instagram",
+                Category.SOCIAL,
+                true
+            )
+        )
     }
 
+    @Test
+    fun `package does not found`() {
+        val applicationInfo = mock(ApplicationInfo::class.java)
+        applicationInfo.packageName = "instagram"
+        applicationInfo.category = Category.SOCIAL.value
+        applicationInfo.enabled = true
+
+        val applicationGateway: ApplicationGateway = PackageManagerGateway(mockPackageManager)
+        `when`(mockPackageManager.getApplicationInfo(anyString(), anyInt()))
+            .thenAnswer { throw PackageManager.NameNotFoundException() }
+
+        val result = applicationGateway.getApplication("instagram")
+
+        result.shouldBeLeft(ApplicationNotFoundException("instagram"))
+    }
 }

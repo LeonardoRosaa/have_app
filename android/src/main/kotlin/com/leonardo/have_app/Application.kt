@@ -13,10 +13,23 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 open class Application(
-    val packageName: String,
-    val category: Category,
-    val enabled: Boolean
-)
+    private val packageName: String,
+    private val category: Category,
+    private val enabled: Boolean,
+) {
+    override fun equals(other: Any?): Boolean {
+        if (other is Application) {
+            return (
+                packageName == other.packageName &&
+                category == other.category &&
+                enabled == other.enabled
+            )
+        }
+
+        return super.equals(other)
+    }
+}
+
 
 @Serializable
 enum class Category(val value: Int) {

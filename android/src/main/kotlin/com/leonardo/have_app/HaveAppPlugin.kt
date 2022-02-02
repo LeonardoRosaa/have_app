@@ -13,35 +13,39 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 /** HaveAppPlugin */
-class HaveAppPlugin: FlutterPlugin, MethodCallHandler {
-  /// The MethodChannel that will the communication between Flutter and native Android
-  ///
-  /// This local reference serves to register the plugin with the Flutter Engine and unregister it
-  /// when the Flutter Engine is detached from the Activity
-  private lateinit var channel : MethodChannel
+class HaveAppPlugin : FlutterPlugin, MethodCallHandler {
+    /// The MethodChannel that will the communication between Flutter and native Android
+    ///
+    /// This local reference serves to register the plugin with the Flutter Engine and unregister it
+    /// when the Flutter Engine is detached from the Activity
+    private lateinit var channel: MethodChannel
 
-  private lateinit var context: Context
+    private lateinit var context: Context
 
-  private lateinit var applicationService: ApplicationService
+    private lateinit var applicationService: ApplicationService
 
-  private lateinit var applicationGateway: ApplicationGateway
+    private lateinit var applicationGateway: ApplicationGateway
 
-  override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    channel = MethodChannel(flutterPluginBinding.binaryMessenger, "have_app")
-    channel.setMethodCallHandler(this)
-    context = flutterPluginBinding.applicationContext
-    applicationGateway = PackageManagerGateway(context.packageManager)
-    applicationService = PackageManagerService(applicationGateway)
-  }
+    override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
+        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "have_app")
+        channel.setMethodCallHandler(this)
+        context = flutterPluginBinding.applicationContext
+        applicationGateway = PackageManagerGateway(context.packageManager)
+        applicationService = PackageManagerService(applicationGateway)
+    }
 
-  override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
-    val obj = Json.decodeFromString<GetApplication>(call.arguments as String)
-    val a = applicationService.getApplication(obj.packageName)
+    override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
+        val obj = Json.decodeFromString<GetApplication>(call.arguments as String)
+        val application = applicationService.getApplication(obj.packageName)
 
-    result.success(Json.encodeToString(a))
-  }
+        application.fold(
+            { error ->
+                result.error(error.name, error.message, error)
+            },
+            { app -> result.success(Json.encodeToString(app)) })
+    }
 
-  override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
-    channel.setMethodCallHandler(null)
-  }
+    override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
+        channel.setMethodCallHandler(null)
+    }
 }

@@ -1,7 +1,6 @@
 package com.leonardo.have_app
 
 import android.content.pm.ApplicationInfo
-
 class ApplicationModel(
     packageName: String,
     category: Category,
@@ -15,8 +14,8 @@ class ApplicationModel(
     companion object {
 
         @JvmStatic
-        fun fromApplicationInfo(applicationInfo: ApplicationInfo): ApplicationModel {
-            return ApplicationModel(
+        fun fromApplicationInfo(applicationInfo: ApplicationInfo): Application {
+            return Application(
                 applicationInfo.packageName,
                 getByValue(applicationInfo.category),
                 applicationInfo.enabled
