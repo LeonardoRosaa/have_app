@@ -35,14 +35,23 @@ class HaveAppPlugin : FlutterPlugin, MethodCallHandler {
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
-        val obj = Json.decodeFromString<GetApplication>(call.arguments as String)
-        val application = applicationService.getApplication(obj.packageName)
+        fun getApplication() {
+            val obj = Json.decodeFromString<GetApplication>(call.arguments as String)
+            val application = applicationService.getApplication(obj.packageName)
 
-        application.fold(
-            { error ->
-                result.error(error.name, error.message, error)
-            },
-            { app -> result.success(Json.encodeToString(app)) })
+            application.fold(
+                { error ->
+                    result.error(error.name, error.message, error)
+                },
+                { app -> result.success(Json.encodeToString(app)) })
+        }
+
+        when (call.method) {
+            "getApplication" -> getApplication()
+            else -> result.notImplemented()
+        }
+
+
     }
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
