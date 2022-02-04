@@ -7,6 +7,8 @@ import 'package:have_app/domain/entities/entities.dart';
 abstract class ApplicationService {
   const ApplicationService();
 
+  /// Get application by [packageName] and if does application exists
+  /// returns [ApplicationModel], does not return an [ApplicationException]
   Future<Either<ApplicationException, Application>> getPackage(
     GetApplication getApplication,
   );

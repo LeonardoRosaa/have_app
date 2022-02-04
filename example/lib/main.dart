@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
+import 'package:have_app/have_app.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,32 +13,28 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
+  final haveApp = HaveApp();
+
+  String text = '';
+
+  Object? result;
 
   @override
   void initState() {
     super.initState();
-    initPlatformState();
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
-    try {
-      platformVersion = 'Unknown platform version';
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
+  void onChange(String value) {
+    setState(() {
+      text = value;
+    });
+  }
 
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
+  void onTap() async {
+    final app = await haveApp.getPackage(GetApplication(packageName: text));
 
     setState(() {
-      _platformVersion = platformVersion;
+      result = app.fold((error) => (error), (application) => application);
     });
   }
 
@@ -49,10 +43,61 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('have_app example'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                Expanded(
+                  child: Center(
+                    child: TextField(
+                      decoration: const InputDecoration(
+                        hintText: 'Type package name',
+                      ),
+                      onChanged: onChange,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      result == null ? 'Do not have a result yet' : result.toString(),
+                      textAlign: TextAlign.center,
+                    ),
+                    
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.only(
+            bottom: 20,
+            left: 20,
+            right: 20,
+          ),
+          child: TextButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(
+                Theme.of(context).primaryColor,
+              ),
+            ),
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Search package',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+            onPressed: text.isEmpty ? null : onTap,
+          ),
         ),
       ),
     );

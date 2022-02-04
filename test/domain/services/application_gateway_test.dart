@@ -22,7 +22,8 @@ void main() {
 
   setUpAll(() {
     registerFallbackValue(
-        GetApplicationModel(packageName: 'com.android.bluetooh'));
+      GetApplicationModel(packageName: 'com.android.bluetooh'),
+    );
   });
 
   group('application gateway', () {
@@ -40,7 +41,8 @@ void main() {
       });
 
       test('does package name not be empty', () async {
-        expect(() => GetApplicationModel(packageName: ''), throwsAssertionError);
+        expect(
+            () => GetApplicationModel(packageName: ''), throwsAssertionError);
       });
 
       test('and not found', () async {
