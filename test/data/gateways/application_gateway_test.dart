@@ -35,7 +35,7 @@ void main() {
         );
 
         final result = await applicationGateway.getPackage(
-          const GetApplicationModel(packageName: 'com.android.bluetooth'),
+          GetApplicationModel(packageName: 'com.android.bluetooth'),
         );
 
         final expectedApplication =
@@ -57,7 +57,7 @@ void main() {
         );
 
         final result = await applicationGateway.getPackage(
-          const GetApplicationModel(packageName: ''),
+          GetApplicationModel(packageName: 'instagram'),
         );
 
         expect(result.fold(id, id), isA<ApplicationPackageNameDoesNotBeEmptyException>());
@@ -76,7 +76,7 @@ void main() {
         );
 
         final result = await applicationGateway.getPackage(
-          const GetApplicationModel(packageName: 'instagram'),
+          GetApplicationModel(packageName: 'instagram'),
         );
 
         expect(result.fold(id, id), isA<ApplicationNotFoundException>());

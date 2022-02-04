@@ -4,7 +4,7 @@ import 'package:have_app/domain/entities/get_application.dart';
 
 class GetApplicationModel extends GetApplication {
 
-  const GetApplicationModel({
+  GetApplicationModel({
     required String packageName,
   }): super(packageName: packageName);
 
@@ -12,6 +12,12 @@ class GetApplicationModel extends GetApplication {
     return {
       'packageName': packageName,
     };
+  }
+
+    factory GetApplicationModel.fromMap(Map<String, dynamic> map) {
+    return GetApplicationModel(
+      packageName: map['packageName'] ?? '',
+    );
   }
 
   String toJson() => jsonEncode(toMap());

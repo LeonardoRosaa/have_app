@@ -1,6 +1,11 @@
-class GetApplication {
+import 'package:have_app/core/faults/application_exception.dart';
 
-  const GetApplication({ required this.packageName });
+class GetApplication {
+  GetApplication({required this.packageName})
+      : assert(
+          packageName.isNotEmpty,
+          const ApplicationPackageNameDoesNotBeEmptyException(),
+        );
 
   final String packageName;
 }
