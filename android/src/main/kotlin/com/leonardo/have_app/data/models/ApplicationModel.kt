@@ -1,6 +1,10 @@
-package com.leonardo.have_app
+package com.leonardo.have_app.data.models
 
 import android.content.pm.ApplicationInfo
+import com.leonardo.have_app.domain.entities.Application
+import com.leonardo.have_app.domain.entities.Category
+import com.leonardo.have_app.domain.entities.getByValue
+
 class ApplicationModel(
     packageName: String,
     category: Category,

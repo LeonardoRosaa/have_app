@@ -1,12 +1,9 @@
 package com.leonardo.have_app
 
-import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager
 import arrow.core.Either
 import com.leonardo.have_app.core.exceptions.ApplicationNotFoundException
 import com.leonardo.have_app.core.exceptions.ApplicationPackageNameDoesNotBeEmptyException
-import io.kotest.assertions.arrow.core.shouldBeLeft
-import io.kotest.assertions.arrow.core.shouldBeRight
+import com.leonardo.have_app.data.models.ApplicationModel
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -14,7 +11,6 @@ import org.mockito.ArgumentMatchers.*
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
 
 @RunWith(MockitoJUnitRunner::class)
 class PackageManagerServiceTestTest {

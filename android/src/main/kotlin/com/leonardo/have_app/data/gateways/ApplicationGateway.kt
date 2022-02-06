@@ -1,9 +1,10 @@
-package com.leonardo.have_app
+package com.leonardo.have_app.data.gateways
 
 import android.content.pm.PackageManager
 import arrow.core.Either
 import com.leonardo.have_app.core.exceptions.*
 import com.leonardo.have_app.core.types.GetApplication
+import com.leonardo.have_app.data.models.ApplicationModel
 import java.lang.Exception
 
 interface ApplicationGateway {

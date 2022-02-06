@@ -2,12 +2,16 @@ package com.leonardo.have_app
 
 import android.content.Context
 import androidx.annotation.NonNull
+import com.leonardo.have_app.data.gateways.ApplicationGateway
+import com.leonardo.have_app.data.gateways.PackageManagerGateway
+import com.leonardo.have_app.domain.entities.GetApplication
+import com.leonardo.have_app.domain.services.ApplicationService
+import com.leonardo.have_app.domain.services.PackageManagerService
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
-import io.flutter.plugin.common.MethodChannel.Result
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json

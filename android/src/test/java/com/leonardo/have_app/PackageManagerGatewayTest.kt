@@ -3,6 +3,10 @@ package com.leonardo.have_app
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import com.leonardo.have_app.core.exceptions.ApplicationNotFoundException
+import com.leonardo.have_app.data.gateways.ApplicationGateway
+import com.leonardo.have_app.data.gateways.PackageManagerGateway
+import com.leonardo.have_app.data.models.ApplicationModel
+import com.leonardo.have_app.domain.entities.Category
 import io.kotest.assertions.arrow.core.shouldBeLeft
 import io.kotest.assertions.arrow.core.shouldBeRight
 

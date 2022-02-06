@@ -1,9 +1,9 @@
-package com.leonardo.have_app
+package com.leonardo.have_app.domain.services
 
 import arrow.core.Either
-import arrow.core.left
 import com.leonardo.have_app.core.exceptions.ApplicationPackageNameDoesNotBeEmptyException
 import com.leonardo.have_app.core.types.GetApplication
+import com.leonardo.have_app.data.gateways.ApplicationGateway
 
 interface ApplicationService {
     /**
