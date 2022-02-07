@@ -26,7 +26,9 @@ class ApplicationGatewayImpl implements ApplicationGateway {
   ) async {
     try {
       final application = await channel.invokeMethod(
-          Channels.getApplication.value, getApplication.toJson());
+        Channels.getApplication.value,
+        getApplication.toJson(),
+      );
 
       return right(ApplicationModel.fromJson(application));
     } on PlatformException catch (error) {

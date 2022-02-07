@@ -38,7 +38,7 @@ class HaveAppPlugin : FlutterPlugin, MethodCallHandler {
         applicationService = PackageManagerService(applicationGateway)
     }
 
-    override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
+    override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: MethodChannel.Result) {
         fun getApplication() {
             val obj = Json.decodeFromString<GetApplication>(call.arguments as String)
             val application = applicationService.getApplication(obj.packageName)
@@ -54,8 +54,6 @@ class HaveAppPlugin : FlutterPlugin, MethodCallHandler {
             "getApplication" -> getApplication()
             else -> result.notImplemented()
         }
-
-
     }
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
