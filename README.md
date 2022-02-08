@@ -1,15 +1,25 @@
-# have_app
+<p align="center">
+    <img src="./docs/images/logo.png" alt="logo" width="128" />
+</p>
 
-A new flutter plugin project.
+<h1>Have app</h1>
 
-## Getting Started
+<p>It plugin does works with applications installed on devices.</p>
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+<br />
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<aside>⚠️ For now, it does works only for Android.</aside>
 
+<br />
+
+<h2>Methods</h2>
+
+`getPackage`  -  get application by `GetApplication` class.
+
+<br />
+
+<h2>Install</h2>
+
+```bash
+flutter pub add have_app
+```
