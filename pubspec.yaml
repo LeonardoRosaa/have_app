@@ -1,6 +1,7 @@
 name: have_app
-description: A new flutter plugin project.
+description: It plugin does works with applications installed on devices.
 version: 0.0.1
+repository: https://github.com/LeonardoRosaa/have_app
 
 environment:
   sdk: ">=2.16.0 <3.0.0"

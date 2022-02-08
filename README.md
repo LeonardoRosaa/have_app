@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="./docs/images/logo.png" alt="logo" width="128" />
+    <img src="./doc/images/logo.png" alt="logo" width="128" />
 </p>
 
 <h1>Have app</h1>
