@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import '../../domain/entities/application.dart';
 
+/// It class extends [Application] to care about other methods, like as encode and decode.
 class ApplicationModel extends Application {
   const ApplicationModel({
     required String packageName,

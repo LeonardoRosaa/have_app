@@ -10,6 +10,8 @@ class ApplicationNotFoundException extends ApplicationException {
   const ApplicationNotFoundException([dynamic error]) : super(error);
 }
 
+/// It's generic [Exception] for when occurs a failure
+/// on try does get an application
 class GetApplicationException extends ApplicationException {
   static const code = 'GetApplicationException';
 

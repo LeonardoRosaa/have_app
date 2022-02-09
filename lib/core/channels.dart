@@ -1,3 +1,4 @@
+/// Channels name to does access in the native platforms
 class Channels {
   const Channels(String value) : _value = value;
 
