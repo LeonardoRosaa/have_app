@@ -7,9 +7,11 @@ import 'package:have_app/core/faults/application_exception.dart';
 import 'package:dartz/dartz.dart';
 import 'package:have_app/domain/services/application_service.dart';
 
+/// The main class of this package, through this class client will access
+/// the main methods of this package.
 class HaveApp implements ApplicationService {
-
-  HaveApp(): _applicationService = ApplicationServiceImpl(
+  HaveApp()
+      : _applicationService = ApplicationServiceImpl(
           applicationGateway: ApplicationGatewayImpl(
             channel: MethodChannel(
               Channels.principal.value,
@@ -20,7 +22,8 @@ class HaveApp implements ApplicationService {
   final ApplicationService _applicationService;
 
   @override
-  Future<Either<ApplicationException, Application>> getPackage(GetApplication getApplication) {
+  Future<Either<ApplicationException, Application>> getPackage(
+      GetApplication getApplication) {
     return _applicationService.getPackage(getApplication);
   }
 }

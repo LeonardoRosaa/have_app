@@ -5,22 +5,21 @@ abstract class ApplicationException implements Exception {
 }
 
 class ApplicationNotFoundException extends ApplicationException {
-
   static const code = 'ApplicationNotFoundException';
 
-  const ApplicationNotFoundException([dynamic error]): super(error);
+  const ApplicationNotFoundException([dynamic error]) : super(error);
 }
 
 class GetApplicationException extends ApplicationException {
-
   static const code = 'GetApplicationException';
 
-  const GetApplicationException([dynamic error]): super(error);
+  const GetApplicationException([dynamic error]) : super(error);
 }
 
-class ApplicationPackageNameDoesNotBeEmptyException extends ApplicationException {
-
+class ApplicationPackageNameDoesNotBeEmptyException
+    extends ApplicationException {
   static const code = 'ApplicationPackageNameDoesNotBeEmptyException';
 
-  const ApplicationPackageNameDoesNotBeEmptyException([dynamic error]): super(error); 
+  const ApplicationPackageNameDoesNotBeEmptyException([dynamic error])
+      : super(error);
 }

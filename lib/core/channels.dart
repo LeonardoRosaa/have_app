@@ -1,6 +1,5 @@
 class Channels {
-
-  const Channels(String value): _value = value;
+  const Channels(String value) : _value = value;
 
   final String _value;
 

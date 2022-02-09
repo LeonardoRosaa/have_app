@@ -60,7 +60,8 @@ void main() {
           GetApplicationModel(packageName: 'instagram'),
         );
 
-        expect(result.fold(id, id), isA<ApplicationPackageNameDoesNotBeEmptyException>());
+        expect(result.fold(id, id),
+            isA<ApplicationPackageNameDoesNotBeEmptyException>());
       });
 
       test('and not found', () async {

@@ -63,10 +63,11 @@ class _MyAppState extends State<MyApp> {
                 Expanded(
                   child: Center(
                     child: Text(
-                      result == null ? 'Do not have a result yet' : result.toString(),
+                      result == null
+                          ? 'Do not have a result yet'
+                          : result.toString(),
                       textAlign: TextAlign.center,
                     ),
-                    
                   ),
                 ),
               ],

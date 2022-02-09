@@ -15,6 +15,7 @@ abstract class ApplicationGateway {
   );
 }
 
+/// This class access the native platforms that's supported by this package
 class ApplicationGatewayImpl implements ApplicationGateway {
   const ApplicationGatewayImpl({required this.channel});
 
