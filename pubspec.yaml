@@ -1,6 +1,6 @@
 name: have_app
 description: It plugin does works with applications installed on devices.
-version: 0.0.2
+version: 0.0.3
 repository: https://github.com/LeonardoRosaa/have_app
 
 environment:

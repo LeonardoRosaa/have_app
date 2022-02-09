@@ -6,3 +6,7 @@
 
 - Added documentation;
 - Formatted code;
+
+## 0.0.3
+
+- Improved documentation;
