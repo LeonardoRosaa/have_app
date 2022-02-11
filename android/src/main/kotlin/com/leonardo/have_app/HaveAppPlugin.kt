@@ -50,8 +50,19 @@ class HaveAppPlugin : FlutterPlugin, MethodCallHandler {
                 { app -> result.success(Json.encodeToString(app)) })
         }
 
+        fun getInstalledApplications() {
+            val application = applicationService.getInstalledApplications()
+
+            application.fold(
+                { error ->
+                    result.error(error.name, error.message, error)
+                },
+                { app -> result.success(Json.encodeToString(app)) })
+        }
+
         when (call.method) {
             "getApplication" -> getApplication()
+            "getInstalledApplications" -> getInstalledApplications()
             else -> result.notImplemented()
         }
     }
