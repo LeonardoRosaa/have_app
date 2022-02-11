@@ -3,7 +3,13 @@ package com.leonardo.have_app
 import arrow.core.Either
 import com.leonardo.have_app.core.exceptions.ApplicationNotFoundException
 import com.leonardo.have_app.core.exceptions.ApplicationPackageNameDoesNotBeEmptyException
+import com.leonardo.have_app.data.gateways.ApplicationGateway
 import com.leonardo.have_app.data.models.ApplicationModel
+import com.leonardo.have_app.domain.entities.Category
+import com.leonardo.have_app.domain.services.ApplicationService
+import com.leonardo.have_app.domain.services.PackageManagerService
+import io.kotest.assertions.arrow.core.shouldBeLeft
+import io.kotest.assertions.arrow.core.shouldBeRight
 
 import org.junit.Test
 import org.junit.runner.RunWith

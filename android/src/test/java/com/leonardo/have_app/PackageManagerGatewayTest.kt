@@ -3,6 +3,8 @@ package com.leonardo.have_app
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import com.leonardo.have_app.core.exceptions.ApplicationNotFoundException
+import com.leonardo.have_app.core.exceptions.CantFoundApplicationsInstalledException
+import com.leonardo.have_app.core.exceptions.GetApplicationsInstalledException
 import com.leonardo.have_app.data.gateways.ApplicationGateway
 import com.leonardo.have_app.data.gateways.PackageManagerGateway
 import com.leonardo.have_app.data.models.ApplicationModel
@@ -93,5 +95,31 @@ class PackageManagerGatewayTest {
         val result = applicationGateway.getInstalledApplications()
 
         result.fold({ 0 }, { assertEquals(it.size, 3) })
+    }
+
+    @Test
+    fun `get installed applications is empty`() {
+        val applicationGateway: ApplicationGateway = PackageManagerGateway(mockPackageManager)
+        `when`(mockPackageManager.getInstalledApplications(anyInt()))
+            .thenAnswer { listOf<ApplicationModel>() }
+
+        val result = applicationGateway.getInstalledApplications()
+
+        result.shouldBeLeft(CantFoundApplicationsInstalledException())
+    }
+
+    @Test
+    fun `get installed applications throw another exception`() {
+        val applicationGateway: ApplicationGateway = PackageManagerGateway(mockPackageManager)
+        `when`(mockPackageManager.getInstalledApplications(anyInt()))
+            .thenAnswer { throw PackageManager.NameNotFoundException() }
+
+        val result = applicationGateway.getInstalledApplications()
+
+        result.shouldBeLeft(
+            GetApplicationsInstalledException(
+                PackageManager.NameNotFoundException().toString()
+            )
+        )
     }
 }
