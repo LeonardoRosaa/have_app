@@ -71,6 +71,7 @@ dependencies {
     testImplementation "io.kotest:kotest-assertions-core:$kotestVersion"
     testImplementation "io.kotest:kotest-property:$kotestVersion"
     testImplementation "io.kotest.extensions:kotest-assertions-arrow:1.2.1"
-    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
 
 }

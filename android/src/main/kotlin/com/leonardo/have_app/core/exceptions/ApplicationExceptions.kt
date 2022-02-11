@@ -18,3 +18,13 @@ class ApplicationPackageNameDoesNotBeEmptyException() :
         "ApplicationPackageNameDoesNotBeEmptyException",
         "The package name of application does not be empty"
     )
+
+class CantFoundApplicationsInstalledException() : ApplicationException(
+    "CantFoundApplicationsInstalledException",
+    "cant found applications installed in device"
+)
+
+class GetApplicationsInstalledException(error: String?): ApplicationException(
+    "GetApplicationsInstalledException",
+    error
+)

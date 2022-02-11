@@ -5,3 +5,5 @@ import com.leonardo.have_app.core.exceptions.ApplicationException
 import com.leonardo.have_app.domain.entities.Application
 
 typealias GetApplication = Either<ApplicationException, Application>
+
+typealias GetAllApplications = Either<ApplicationException, List<Application>>

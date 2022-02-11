@@ -9,6 +9,7 @@ import com.leonardo.have_app.data.models.ApplicationModel
 import com.leonardo.have_app.domain.entities.Category
 import io.kotest.assertions.arrow.core.shouldBeLeft
 import io.kotest.assertions.arrow.core.shouldBeRight
+import kotlin.test.assertEquals
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -60,5 +61,37 @@ class PackageManagerGatewayTest {
         val result = applicationGateway.getApplication("instagram")
 
         result.shouldBeLeft(ApplicationNotFoundException("instagram"))
+    }
+
+    @Test
+    fun `get installed applications`() {
+        val applicationInfo = mock(ApplicationInfo::class.java)
+        applicationInfo.packageName = "instagram"
+        applicationInfo.category = Category.SOCIAL.value
+        applicationInfo.enabled = true
+
+        val applicationInfo1 = mock(ApplicationInfo::class.java)
+        applicationInfo1.packageName = "com.android.calculator"
+        applicationInfo1.category = Category.UNDEFINED.value
+        applicationInfo1.enabled = true
+
+        val applicationInfo2 = mock(ApplicationInfo::class.java)
+        applicationInfo1.packageName = "com.android.gmail"
+        applicationInfo1.category = Category.PRODUCTIVITY.value
+        applicationInfo1.enabled = true
+
+        val applicationGateway: ApplicationGateway = PackageManagerGateway(mockPackageManager)
+        `when`(mockPackageManager.getInstalledApplications(anyInt()))
+            .thenAnswer {
+                listOf<ApplicationInfo>(
+                    applicationInfo,
+                    applicationInfo1,
+                    applicationInfo2
+                )
+            }
+
+        val result = applicationGateway.getInstalledApplications()
+
+        result.fold({ 0 }, { assertEquals(it.size, 3) })
     }
 }
