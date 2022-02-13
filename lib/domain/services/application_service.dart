@@ -12,6 +12,9 @@ abstract class ApplicationService {
   Future<Either<ApplicationException, Application>> getPackage(
     GetApplication getApplication,
   );
+
+  /// Get all installed applications in device
+  Future<Either<ApplicationException, List<ApplicationModel>>> getAllInstalled();
 }
 
 class ApplicationServiceImpl implements ApplicationService {
@@ -25,5 +28,10 @@ class ApplicationServiceImpl implements ApplicationService {
     return applicationGateway.getPackage(
       GetApplicationModel(packageName: getApplication.packageName),
     );
+  }
+
+  @override
+  Future<Either<ApplicationException, List<ApplicationModel>>> getAllInstalled() {
+    return applicationGateway.getAllInstalled();
   }
 }

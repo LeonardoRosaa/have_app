@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:have_app/core/channels.dart';
 import 'package:have_app/data/gateways/application_gateway.dart';
+import 'package:have_app/data/models/application_model.dart';
 import 'package:have_app/domain/entities/get_application.dart';
 import 'package:have_app/domain/entities/application.dart';
 import 'package:have_app/core/faults/application_exception.dart';
@@ -25,5 +26,10 @@ class HaveApp implements ApplicationService {
   Future<Either<ApplicationException, Application>> getPackage(
       GetApplication getApplication) {
     return _applicationService.getPackage(getApplication);
+  }
+
+  @override
+  Future<Either<ApplicationException, List<ApplicationModel>>> getAllInstalled() {
+    return _applicationService.getAllInstalled();
   }
 }

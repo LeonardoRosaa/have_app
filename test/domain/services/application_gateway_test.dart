@@ -57,5 +57,40 @@ void main() {
         expect(result.fold(id, id), isA<ApplicationNotFoundException>());
       });
     });
+
+    group('get all installed applications', () {
+      const applications = [
+        ApplicationModel(
+          packageName: 'com.android.bluetooth',
+          enabled: true,
+          category: Category.undefined,
+        ),
+        ApplicationModel(
+            packageName: 'com.android.gmail',
+            enabled: true,
+            category: Category.productivity),
+      ];
+
+      test('does found', () async {
+        when(() => applicationGateway.getAllInstalled())
+            .thenAnswer((_) async => right(applications));
+
+        final result = await applicationService.getAllInstalled();
+
+        expect(result.fold(id, id), applications);
+      });
+
+      test('can not be found', () async {
+        when(() => applicationGateway.getAllInstalled()).thenAnswer(
+          (_) async => left(
+            const CantFoundApplicationsInstalledException(),
+          ),
+        );
+
+        final result = await applicationService.getAllInstalled();
+
+        expect(result.fold(id, id), isA<CantFoundApplicationsInstalledException>());
+      });
+    });
   });
 }
