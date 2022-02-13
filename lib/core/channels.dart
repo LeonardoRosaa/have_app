@@ -12,4 +12,7 @@ class Channels {
   /// The [value] of the method to
   /// get application by package name
   static const getApplication = Channels('getApplication');
+
+  /// The [value] get all installed applications
+  static const getInstalledApplications = Channels('getInstalledApplications');
 }

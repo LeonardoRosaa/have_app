@@ -25,3 +25,20 @@ class ApplicationPackageNameDoesNotBeEmptyException
   const ApplicationPackageNameDoesNotBeEmptyException([dynamic error])
       : super(error);
 }
+
+/// Can't not found anything application installed in device
+class CantFoundApplicationsInstalledException extends ApplicationException {
+  static const code = 'CantFoundApplicationsInstalledException';
+
+  const CantFoundApplicationsInstalledException()
+      : super(
+          'Can not found applications installed in device',
+        );
+}
+
+/// There's some error on get installed applications in device
+class  GetApplicationsInstalledException extends ApplicationException {
+  static const code = 'GetApplicationsInstalledException';
+
+  const GetApplicationsInstalledException([Object? error]): super(error);
+}
