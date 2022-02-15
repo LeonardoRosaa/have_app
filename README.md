@@ -10,9 +10,9 @@
 
 <h2>Methods</h2>
 
-`getPackage`  -  get application by `GetApplication` class.
+`getPackage`  -  get application by `GetApplication` class;
 
-`getAllInstalled` get all installed applications;
+`getAllInstalled` - get all installed applications.
 
 <h2>Install</h2>
 
